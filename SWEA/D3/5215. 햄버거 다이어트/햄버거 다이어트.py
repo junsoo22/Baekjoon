@@ -2,6 +2,11 @@
 
 def dfs(idx,sm,limit):
     global ans
+
+    #가지치기
+    if limit>l:
+        return
+
     if idx==n:
         if limit<=l:
             ans=max(ans,sm)
