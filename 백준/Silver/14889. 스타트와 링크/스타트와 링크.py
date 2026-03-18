@@ -21,7 +21,7 @@ for i in combi:
 for i in range(n):
     skill.append(list(map(int,input().split())))
 
-result=[]
+result=9999
 sumA=0
 sumB=0
 answer=0
@@ -43,8 +43,8 @@ for i in range(len(s)):
 
 
     answer=abs(sumA-sumB)
-    result.append(answer)
-print(min(result))
+    result=min(answer,result)
+print(result)
 
 
 
