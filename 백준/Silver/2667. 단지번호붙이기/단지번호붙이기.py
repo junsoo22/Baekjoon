@@ -1,47 +1,45 @@
 from collections import deque
 
-n=int(input())
-g=[]
-
-for i in range(n):
-    m=list(map(int,input()))
-    g.append(m)
-
 def bfs(x,y):
-    count=1
     queue=deque()
     queue.append((x,y))
     visited[x][y]=True
-  
+    cells=[(x,y)]
+    dx=[-1,0,1,0]
+    dy=[0,-1,0,1]
+
     while queue:
 
-        s=len(queue)
-        for i in range(s):
-            x,y=queue.popleft()
-            for i in range(4):
-                wx=dx[i]+x
-                wy=dy[i]+y
+        x,y=queue.popleft()
 
-                if 0<=wx<n and 0<=wy<n and not visited[wx][wy] and g[wx][wy]==1:
+        for i in range(4):
+            wx=x+dx[i]
+            wy=y+dy[i]
 
-                    queue.append((wx,wy))
-                    visited[wx][wy]=True
-                    count+=1
-    result.append(count)
-        
-dx=[0,0,1,-1]
-dy=[1,-1,0,0]
-count=0
-total=0
-visited=[[False]*n for i in range(n)]
+            if 0<=wx<n and 0<=wy<n and visited[wx][wy]==False and graph[wx][wy]==1:
+                queue.append((wx,wy))
+                visited[wx][wy]=True
+                cells.append((wx,wy))
+    # print(cells)
+    result.append(len(cells))
+    # print(result)
+    
 
+n=int(input())
+
+graph=[]
+for i in range(n):
+    graph.append(list(map(int,input().strip())))
+# print(graph)
 result=[]
+visited=[[False]*n for _ in range(n)]
+cnt=0
 for i in range(n):
     for j in range(n):
-        if g[i][j]==1 and not visited[i][j]:
+        if graph[i][j]==1 and not visited[i][j]:
             bfs(i,j)
-
+            cnt+=1
+print(cnt)
 result.sort()
-print(len(result))
-for i in result:
-    print(i)
+for i in range(len(result)):
+    print(result[i])
