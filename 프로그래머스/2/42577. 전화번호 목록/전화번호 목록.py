@@ -1,10 +1,8 @@
-def solution(phone_book):
-    phone_book.sort()
-    # print(phone_book)
-    
-    for i in range(len(phone_book) - 1):
-        # 앞 번호가 뒤 번호의 접두어인지 확인
-        if phone_book[i+1].startswith(phone_book[i]):
+
+def solution(phoneBook):
+    phoneBook = sorted(phoneBook)
+
+    for p1, p2 in zip(phoneBook, phoneBook[1:]):
+        if p2.startswith(p1):
             return False
-    
     return True
